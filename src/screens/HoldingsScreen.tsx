@@ -1,4 +1,5 @@
-import { useRef, useState } from 'react';
+import { useMemo, useRef, useState } from 'react';
+import { searchUniverse } from '../lib/search';
 import { finnhubDps, finnhubQuote, proxyTicker, settings, clearTickerCache } from '../lib/data';
 import { importCsv, newId, toCsv } from '../lib/csv';
 import { makeBackup, readBackup } from '../lib/store';
@@ -77,6 +78,8 @@ export function HoldingsScreen({ ctx }: { ctx: Ctx }) {
 
 function EditSheet({ ctx, h, onClose }: { ctx: Ctx; h: Holding | null; onClose: () => void }) {
   const [ticker, setTicker] = useState(h?.ticker ?? '');
+  const [q, setQ] = useState(h?.ticker ?? '');
+  const [open, setOpen] = useState(false);
   const [shares, setShares] = useState(h ? String(h.shares) : '');
   const [cost, setCost] = useState(h ? String(h.cost || '') : '');
   const [drip, setDrip] = useState(h?.drip ?? false);
@@ -86,10 +89,13 @@ function EditSheet({ ctx, h, onClose }: { ctx: Ctx; h: Holding | null; onClose: 
   const [note, setNote] = useState('');
   const T = ticker.trim().toUpperCase();
   const bundled = ctx.bundled.has(T);
-  const needManual = !!T && !bundled && !ctx.data[T];
+  const results = useMemo(() => (ctx.universe ? searchUniverse(ctx.universe.rows, q, 25) : []), [ctx.universe, q]);
+  const sel = ctx.universe?.rows.find(r => r[0] === T);
+  const needManual = !!T && !bundled && !ctx.data[T] && results.length === 0;
+
   const manualOn = useManual || needManual;
   const sh = parseFloat(shares), c = parseFloat(cost.replace(/[$,]/g, '')) || 0, a = parseFloat(amt);
-  const valid = /^[A-Z0-9.-]{1,10}$/.test(T) && sh > 0 && (!manualOn || (a > 0 && m.months.length === m.freq));
+  const valid = /^[A-Z0-9.-]{1,10}$/.test(T) && sh > 0 && (bundled || !!ctx.data[T] || manualOn) && (!manualOn || (a > 0 && m.months.length === m.freq));
   const save = () => {
     const manual = manualOn ? { ...m, amount: a } : null;
     const nh: Holding = { id: h?.id ?? newId(), ticker: T, shares: sh, cost: c, drip, manual };
@@ -107,12 +113,24 @@ function EditSheet({ ctx, h, onClose }: { ctx: Ctx; h: Holding | null; onClose: 
   };
   return (
     <Sheet title={h ? `Edit ${h.ticker}` : 'Add holding'} onClose={onClose}>
-      <label className="field">Ticker
-        <input value={ticker} onChange={e => setTicker(e.target.value.toUpperCase())} list="bundled" placeholder="e.g. KO or SCHD" autoCapitalize="characters" autoCorrect="off" spellCheck={false} />
-        <datalist id="bundled">{ctx.index?.tickers.map(t => <option key={t.ticker} value={t.ticker}>{t.name}</option>)}</datalist>
-        <small>{!T ? `${ctx.index?.tickers.length ?? 0} popular dividend stocks and ETFs have bundled data.` : bundled ? `✓ ${ctx.index?.tickers.find(t => t.ticker === T)?.name}: bundled price and dividend history.` : ctx.data[T] ? 'Live data loaded via proxy.' : 'Not in the bundled list: enter its dividend schedule below.'}</small>
-      </label>
-      <div className="quick">{!h && !T && ctx.index?.tickers.slice(0, 33).map(t => <button key={t.ticker} onClick={() => setTicker(t.ticker)}>{t.ticker}</button>)}</div>
+      <div className="field">Ticker or company
+        <div className="search">
+          <input value={q} onChange={e => { setQ(e.target.value); setTicker(e.target.value.toUpperCase().trim().replace('.', '-')); setOpen(true); }} onFocus={() => setOpen(true)}
+            placeholder="Search e.g. KO, Coca-Cola, SCHD" autoCapitalize="characters" autoCorrect="off" spellCheck={false} inputMode="search" aria-label="Search ticker or company" />
+          {open && results.length > 0 && !(results.length === 1 && results[0][0] === T && q.toUpperCase() === T) && (
+            <ul className="results" role="listbox">
+              {results.map(r => (
+                <li key={r[0]} role="option" onMouseDown={e => e.preventDefault()} onClick={() => { setTicker(r[0]); setQ(r[0]); setOpen(false); }}>
+                  <b>{r[0]}</b><span>{r[1]}</span><em className={r[2] === 'F' ? 'fund' : ''}>{r[2] === 'F' ? 'ETF' : 'Stock'}</em><i>{r[5] ? 'irregular' : `${(r[3] * 100).toFixed(2)}%`}</i>
+                </li>))}
+            </ul>)}
+        </div>
+        <small>{!T ? `${(ctx.universe?.rows.length ?? ctx.index?.tickers.length ?? 0).toLocaleString('en-US')} US dividend stocks and ETFs searchable${ctx.universe ? ` (as of ${ctx.universe.asOf})` : ''}.`
+          : sel ? <>✓ {sel[1]} · {sel[2] === 'F' ? 'ETF/fund' : 'stock'} · {sel[5] ? <b className="warnline">irregular payer: projections unreliable</b> : `${(sel[3] * 100).toFixed(2)}% forward yield`}</>
+          : bundled ? `✓ ${ctx.index?.tickers.find(t => t.ticker === T)?.name ?? T}: bundled price and dividend history.`
+          : ctx.data[T] ? 'Live data loaded via proxy.' : results.length ? 'Pick a match above, or keep typing.' : 'Not in the dividend universe (no dividend in ~13 months, or not US-listed): enter its schedule below.'}</small>
+      </div>
+      {!h && !T && <div className="quick">{ctx.index?.tickers.slice(0, 18).map(t => <button key={t.ticker} onClick={() => { setTicker(t.ticker); setQ(t.ticker); }}>{t.ticker}</button>)}</div>}
       <div className="grid2">
         <label className="field">Shares<input inputMode="decimal" value={shares} onChange={e => setShares(e.target.value)} placeholder="0" /></label>
         <label className="field">Cost basis (total $)<input inputMode="decimal" value={cost} onChange={e => setCost(e.target.value)} placeholder="optional" /></label>

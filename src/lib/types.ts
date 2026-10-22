@@ -12,4 +12,4 @@ export type ManualDiv = { amount: number; freq: 1 | 2 | 4 | 12; months: number[]
 export type Holding = { id: string; ticker: string; shares: number; cost: number /* total cost basis $ */; drip: boolean; manual?: ManualDiv | null };
 export type Cpi = { yoy: number; index: number; indexYearAgo: number; period: string; series: string; source: string; fetched: string };
 export type Lag = { stock: number | null; fund: number | null; n: number; from?: string[] };
-export type Index = { updated: string; tickers: { ticker: string; name: string; type: 'stock' | 'fund'; price: number; priceDate: string }[]; cpi: Cpi | null; lag?: Lag };
+export type Index = { updated: string; tickers: { ticker: string; name: string; type: 'stock' | 'fund'; price: number; priceDate: string }[]; cpi: Cpi | null; lag?: Lag; universe?: { count: number; asOf: string } };

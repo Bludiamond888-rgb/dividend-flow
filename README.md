@@ -22,10 +22,12 @@ An installable dividend-income tracker (React + TypeScript + Vite PWA). Live: ht
 | Any ticker live (optional) | Cloudflare Worker in `worker/` proxying Yahoo + SEC | your Worker |
 | Margin rate | you enter it (Settings or Yield tab) | – |
 
-Bundled tickers (33): KO PEP JNJ PG O MO VZ T ABBV XOM CVX JPM MAIN HD MCD PFE IBM CSCO TXN LMT UPS NEE ARCC + ETFs SCHD VYM JEPI JEPQ QYLD SPYD DIVO DGRO VIG HDV.
+**Universe:** every US-listed stock and ETF (Nasdaq Trader listing files: Nasdaq, NYSE, NYSE American, NYSE Arca, Cboe) that paid a dividend in the last ~13 months — about 6,400 symbols — rebuilt weekly into `data/universe.json` (ticker, name, type, forward yield, price) plus one small JSON per ticker. The Add-holding sheet searches it by ticker or company name and lazy-loads the ticker's file (cached by the service worker for offline). The weekly job keeps the last good data on any failure and publishes it to the `data` branch, which the Pages build overlays onto `public/data`.
+
+Core tickers (33, richer SEC companyfacts data, precached): KO PEP JNJ PG O MO VZ T ABBV XOM CVX JPM MAIN HD MCD PFE IBM CSCO TXN LMT UPS NEE ARCC + ETFs SCHD VYM JEPI JEPQ QYLD SPYD DIVO DGRO VIG HDV.
 Other tickers: enter a manual schedule (amount per payment, payments/year, pay months) or use the proxy.
 
-`npm run refresh-data` rebuilds `public/data`; `.github/workflows/refresh-data.yml` runs it every Monday and redeploys.
+`npm run refresh-data` rebuilds the 33 core tickers + CPI; `npm run build-universe` builds the full universe (≈5 min; set `DATA_DIR`); `.github/workflows/refresh-data.yml` runs it every Monday and redeploys.
 
 ## Method notes
 - Annual income = the next 12 months of expected payments for the shares you hold. Stocks use the latest regular dividend × frequency; funds repeat the last 12 months of distributions. Special/supplemental dividends are excluded from forecasts. Announced payments (Nasdaq) keep their real dates.

@@ -37,6 +37,22 @@ const ip = devices['iPhone 15 Pro'];
   await p.fill('.sheet input[inputmode=decimal] >> nth=0', '100'); await p.fill('.manual input', '0.25'); await shot(p, '12-manual-schedule', false);
   await c.close();
 }
+// 2b. universe search + add flow
+{
+  const c = await ctx(ip, false); const p = await c.newPage();
+  await p.goto(B + '#holdings'); await p.click('text=＋ Add holding'); await p.waitForTimeout(400);
+  await shot(p, '23-search-empty', false);
+  await p.fill('.sheet .search input', 'coca'); await p.waitForSelector('.results li'); await shot(p, '24-search-coca', false);
+  await p.click('.results li:has-text("CCEP")'); await p.fill('.sheet input[inputmode=decimal] >> nth=0', '50'); await shot(p, '25-search-picked', false);
+  await p.click('.sheet .primary');
+  await p.click('text=＋ Add holding'); await p.fill('.sheet .search input', 'realty'); await p.waitForSelector('.results li'); await shot(p, '26-search-realty', false);
+  await p.click('.results li >> nth=0'); await p.fill('.sheet input[inputmode=decimal] >> nth=0', '20'); await p.click('.sheet .primary');
+  await p.click('text=＋ Add holding'); await p.fill('.sheet .search input', 'yieldmax'); await p.waitForSelector('.results li'); await shot(p, '27-search-etf', false);
+  await p.click('.sheet .close');
+  await p.click('.tab:has-text("Flow")'); await p.waitForSelector('.chartwrap svg .node'); await shot(p, '28-universe-flow');
+  await p.click('.tab:has-text("Safety")'); await shot(p, '29-universe-safety', false);
+  await c.close();
+}
 // 3. many holdings via localStorage
 {
   const all = ['KO','PEP','JNJ','PG','O','MO','VZ','T','ABBV','XOM','CVX','JPM','MAIN','HD','MCD','PFE','IBM','CSCO','TXN','LMT','UPS','NEE','ARCC','SCHD','VYM','JEPI','JEPQ','QYLD','SPYD','DIVO','DGRO','VIG','HDV'];

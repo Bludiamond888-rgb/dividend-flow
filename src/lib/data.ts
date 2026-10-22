@@ -1,4 +1,5 @@
 import type { Index, TickerData } from './types';
+import type { URow } from './search';
 const LS = (k: string) => localStorage.getItem('df.' + k) || '';
 export const settings = {
   get finnhub() { return LS('finnhub'); }, set finnhub(v: string) { localStorage.setItem('df.finnhub', v.trim()); },
@@ -9,6 +10,13 @@ export const settings = {
 };
 const BASE = './data/';
 export async function loadIndex(): Promise<Index> { return (await fetch(BASE + 'index.json')).json(); }
+export type Universe = { updated: string; asOf: string; rows: URow[] };
+let uni: Promise<Universe | null> | null = null;
+/** Searchable index of every US-listed stock/ETF with a dividend in the last ~13 months (built weekly). */
+export function loadUniverse(): Promise<Universe | null> {
+  if (!uni) uni = fetch(BASE + 'universe.json').then(r => (r.ok ? r.json() : null)).catch(() => null);
+  return uni;
+}
 const cache = new Map<string, Promise<TickerData | null>>();
 /** Bundled data first; live overrides (Finnhub quote / proxy) are layered on from localStorage. */
 export function loadTicker(t: string, bundled: boolean): Promise<TickerData | null> {

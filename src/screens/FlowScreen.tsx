@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react';
 import { C, FlowChart, PALETTE, type FLink, type FNode } from '../components/FlowChart';
 import { dateLong, dps, money, pct } from '../lib/format';
+import { isIrregular } from '../lib/income';
 import type { Ctx } from './ctx';
 import { Empty, Kpi, Sheet, sourceLine } from './common';
 
@@ -64,6 +65,7 @@ export function FlowScreen({ ctx }: { ctx: Ctx }) {
             <Kpi k="Shares" v={selRow.h.shares.toLocaleString('en-US')} s={`${selRow.proj.freq || '—'}× per year`} />
             <Kpi k="Yield on cost" v={pct(selRow.yoc)} s={selRow.h.cost ? `cost ${money(selRow.h.cost, false)}` : 'no cost basis'} />
           </div>
+          {selRow.t && isIrregular(selRow.t.divs, selRow.yieldPct, ctx.today) && <p className="tipbox warnbox">Irregular payer: too few recent payments or an unusually high yield (likely a special distribution). Treat this projection with caution.</p>}
           <p className="fine">Method: {selRow.proj.method}.{selRow.proj.specialsExcluded ? ' Special/supplemental dividends are excluded from the forecast.' : ''}</p>
           <p className="fine">Price {selRow.t?.priceDate ? `as of ${dateLong(selRow.t.priceDate)}` : '—'} ({selRow.t?.live ?? selRow.t?.sources?.price ?? 'manual'}). Dividends: {selRow.h.manual ? 'your manual schedule' : selRow.t?.sources?.dividends ?? '—'}.</p>
         </Sheet>

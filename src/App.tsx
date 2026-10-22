@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useMemo, useState } from 'react';
-import { loadIndex, loadTicker, settings } from './lib/data';
+import { loadIndex, loadTicker, loadUniverse, settings, type Universe } from './lib/data';
 import { portfolioIncome } from './lib/income';
 import { loadHoldings, SAMPLE, saveHoldings } from './lib/store';
 import type { Holding, Index, TickerData } from './lib/types';
@@ -27,6 +27,7 @@ const tabFromHash = (): Tab => { const h = location.hash.slice(1); return (TABS.
 export default function App() {
   const [tab, setTab] = useState<Tab>(tabFromHash);
   const [index, setIndex] = useState<Index | null>(null);
+  const [universe, setUniverse] = useState<Universe | null>(null);
   const [holdings, setHoldingsState] = useState<Holding[]>(loadHoldings);
   const [sample, setSample] = useState(() => localStorage.getItem('df.sample') === '1');
   const [data, setData] = useState<Record<string, TickerData>>({});
@@ -36,11 +37,11 @@ export default function App() {
   const today = todayISO();
 
   useEffect(() => { const f = () => setTab(tabFromHash()); addEventListener('hashchange', f); return () => removeEventListener('hashchange', f); }, []);
-  useEffect(() => { loadIndex().then(setIndex).catch(() => setErr('Could not load bundled data. If you are offline, open the app once online first.')); }, []);
+  useEffect(() => { loadIndex().then(setIndex).catch(() => setErr('Could not load bundled data. If you are offline, open the app once online first.')); loadUniverse().then(setUniverse); }, []);
   useEffect(() => { localStorage.setItem('df.sample', sample ? '1' : '0'); }, [sample]);
   const setHoldings = useCallback((h: Holding[]) => { setHoldingsState(h); saveHoldings(h); }, []);
   const portfolio = sample ? SAMPLE : holdings;
-  const bundled = useMemo(() => new Set(index?.tickers.map(t => t.ticker) ?? []), [index]);
+  const bundled = useMemo(() => new Set([...(index?.tickers.map(t => t.ticker) ?? []), ...(universe?.rows.map(r => r[0]) ?? [])]), [index, universe]);
   useEffect(() => {
     if (!index) return;
     const need = [...new Set(portfolio.map(h => h.ticker))];
@@ -50,7 +51,7 @@ export default function App() {
   }, [index, portfolio, bundled, ver]);
   const pf = useMemo(() => portfolioIncome(portfolio, data, today, index?.lag), [portfolio, data, today, index]);
   const go = (t: Tab) => { location.hash = t; setTab(t); scrollTo(0, 0); };
-  const ctx: Ctx = { pf, data, index, today, holdings, portfolio, sample, setSample, setHoldings, bundled, go, refresh: () => setVer(v => v + 1), openSettings: () => setShowSettings(true) };
+  const ctx: Ctx = { pf, data, index, universe, today, holdings, portfolio, sample, setSample, setHoldings, bundled, go, refresh: () => setVer(v => v + 1), openSettings: () => setShowSettings(true) };
   const title = TABS.find(t => t.id === tab)!.label;
 
   return (
@@ -85,7 +86,7 @@ export default function App() {
           Projections and estimates are not guarantees. Not investment advice.
         </footer>
       </main>
-      {showSettings && <SettingsSheet onClose={() => { setShowSettings(false); setVer(v => v + 1); }} index={index} />}
+      {showSettings && <SettingsSheet onClose={() => { setShowSettings(false); setVer(v => v + 1); }} index={index} universe={universe} />}
     </div>
   );
 }

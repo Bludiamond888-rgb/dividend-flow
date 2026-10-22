@@ -6,8 +6,8 @@ import fs from 'node:fs';
 import { secMetrics } from '../src/lib/sec.ts';
 const SEC_UA = process.env.SEC_USER_AGENT || 'DividendFlow/1.0 Jackie Lin jackie@localhost';
 const WEB_UA = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/605.1.15 Safari/605.1.15';
-export const STARTER = ['KO','PEP','JNJ','PG','O','MO','VZ','T','ABBV','XOM','CVX','JPM','MAIN','HD','MCD','PFE','IBM','CSCO','TXN','LMT','UPS','NEE','ARCC',
-  'SCHD','VYM','JEPI','JEPQ','QYLD','SPYD','DIVO','DGRO','VIG','HDV'];
+import { STARTER } from './starter.ts';
+export { STARTER };
 const sleep = (ms: number) => new Promise(r => setTimeout(r, ms));
 async function get(url: string, headers: Record<string, string>, tries = 4, init?: RequestInit): Promise<any> {
   for (let i = 0; i < tries; i++) {
@@ -22,7 +22,7 @@ async function get(url: string, headers: Record<string, string>, tries = 4, init
 }
 const ymd = (s: number) => new Date(s * 1000).toISOString().slice(0, 10);
 const mdy = (s: string) => { const m = /^(\d\d)\/(\d\d)\/(\d{4})$/.exec(s || ''); return m ? `${m[3]}-${m[1]}-${m[2]}` : null; };
-const out = 'public/data';
+const out = process.env.DATA_DIR || 'public/data';
 fs.mkdirSync(out, { recursive: true });
 const args = process.argv.slice(2);
 const list = args.length ? args : STARTER;

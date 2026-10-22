@@ -1,10 +1,10 @@
 // Dividend Flow service worker. Bump VERSION on each release.
-const VERSION = 'df-v2';
-const SHELL = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './data/index.json'];
+const VERSION = 'df-v3';
+const SHELL = ['./', './index.html', './manifest.webmanifest', './icon-192.png', './icon-512.png', './apple-touch-icon.png', './data/index.json', './data/universe.json'];
 self.addEventListener('install', e => {
   self.skipWaiting();
   e.waitUntil(caches.open(VERSION).then(async c => {
-    await c.addAll(SHELL);
+    await Promise.all(SHELL.map(u => c.add(u).catch(() => {}))); // universe.json may be absent on a fallback build
     // precache the bundled ticker files so holdings work offline
     try { const idx = await (await fetch('./data/index.json')).json(); await c.addAll(idx.tickers.map(t => `./data/${t.ticker}.json`)); } catch { /* best effort */ }
     // precache the built JS/CSS referenced by index.html

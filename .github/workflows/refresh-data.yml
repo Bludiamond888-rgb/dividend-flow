@@ -3,23 +3,42 @@ on:
   schedule: [{ cron: '23 11 * * 1' }]  # Mondays 11:23 UTC
   workflow_dispatch:
 permissions: { contents: write, pages: write, id-token: write, actions: write }
+concurrency: { group: data-refresh, cancel-in-progress: false }
 jobs:
   refresh:
     runs-on: ubuntu-latest
+    timeout-minutes: 90
     steps:
       - uses: actions/checkout@v4
+      # last good data set lives on the `data` branch (single force-pushed commit, so history doesn't grow)
+      - uses: actions/checkout@v4
+        continue-on-error: true
+        with: { ref: data, path: datastore }
+      - name: Seed data store
+        run: |
+          mkdir -p datastore
+          [ -f datastore/index.json ] || cp public/data/*.json datastore/
+          rm -rf datastore/.git
       - uses: actions/setup-node@v4
         with: { node-version: 20, cache: npm }
       - run: npm ci
-      # Yahoo chart (prices, dividends), Nasdaq (pay dates), SEC EDGAR (safety), BLS (CPI). Failed tickers keep last week's file.
-      - run: npm run refresh-data
-        env: { SEC_USER_AGENT: 'DividendFlow/1.0 Jackie Lin jackie@localhost' }
-      - run: npm test
-      - name: Commit if changed and redeploy
+      - name: Core 33 tickers (Yahoo + Nasdaq + SEC companyfacts) and CPI
+        run: npm run refresh-data
+        env: { DATA_DIR: datastore, SEC_USER_AGENT: 'DividendFlow/1.0 Jackie Lin jackie@localhost' }
+      - name: Full US dividend universe (Nasdaq Trader listings + Yahoo + Nasdaq + SEC frames)
+        run: npm run build-universe
+        env: { DATA_DIR: datastore, SEC_USER_AGENT: 'DividendFlow/1.0 Jackie Lin jackie@localhost', NASDAQ_BUDGET_MIN: '25' }
+      - name: Test against the new data
+        run: cp datastore/*.json public/data/ && npm test
+      - name: Summary
+        run: |
+          echo "### Data refresh" >> $GITHUB_STEP_SUMMARY
+          echo '```' >> $GITHUB_STEP_SUMMARY; cat datastore/universe-stats.json >> $GITHUB_STEP_SUMMARY; echo '```' >> $GITHUB_STEP_SUMMARY
+      - name: Publish data branch and redeploy
         env: { GH_TOKEN: '${{ github.token }}' }
         run: |
-          if git diff --quiet -- public/data; then echo "No data changes"; exit 0; fi
-          git config user.name 'Jackie Lin'; git config user.email jackie@localhost
-          git add public/data && git commit -m "Weekly data refresh" && git push
-          # pushes made with GITHUB_TOKEN don't trigger other workflows, so dispatch Pages explicitly
-          gh workflow run pages.yml --ref main
+          cd datastore
+          git init -q -b data && git config user.name 'Jackie Lin' && git config user.email jackie@localhost
+          git add -A && git commit -qm "Data refresh $(date -u +%F)"
+          git push -q --force "https://x-access-token:${GH_TOKEN}@github.com/${GITHUB_REPOSITORY}.git" data
+          cd .. && gh workflow run pages.yml --ref main

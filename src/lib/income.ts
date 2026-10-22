@@ -138,3 +138,9 @@ export function calendar(payments: Payment[], today: string) {
   const nextGroup = next ? payments.filter(p => p.pay === next.pay) : [];
   return { months, total, monthlyAvg: total / 12, next, nextDays, nextGroup };
 }
+/** Irregular payer: fewer than 2 payments in the last 2 years, or a forward yield so high it is almost certainly a one-off/special
+ *  distribution or a data artifact (e.g. a reverse split). Projections for these are shown with a warning. */
+export function isIrregular(divs: Div[], yieldPct: number | null, today: string): boolean {
+  const recent = divs.filter(d => parseD(d.ex) > parseD(today) - 730 * DAY && parseD(d.ex) <= parseD(today) + 90 * DAY).length;
+  return recent < 2 || (yieldPct != null && yieldPct > 0.6);
+}
