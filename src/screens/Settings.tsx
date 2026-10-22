@@ -16,9 +16,9 @@ export function SettingsSheet({ onClose, index }: { onClose: () => void; index: 
   };
   return (
     <Sheet title="Settings" onClose={onClose}>
-      <label className="field">Schwab margin rate (%)
-        <input inputMode="decimal" value={m} onChange={e => setM(e.target.value)} placeholder="enter current first-tier rate" />
-        <small>Used on the Yield tab. There is no free API for it, so check schwab.com/margin and type Schwab’s current first-tier rate.</small>
+      <label className="field">Margin rate (%)
+        <input inputMode="decimal" value={m} onChange={e => setM(e.target.value)} placeholder="enter your margin rate" />
+        <small>Used on the Yield tab to compare each holding’s yield with what borrowing costs you. Enter your broker’s current rate.</small>
       </label>
       <label className="field">Finnhub API key (optional, free at finnhub.io)
         <input value={k} onChange={e => setK(e.target.value)} placeholder="paste key" autoCapitalize="off" autoCorrect="off" spellCheck={false} />

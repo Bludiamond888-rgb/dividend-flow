@@ -25,9 +25,9 @@ export function YieldScreen({ ctx }: { ctx: Ctx }) {
           <div className="s">{cpi ? `${cpi.period} · BLS, fetched ${cpi.fetched.slice(0, 10)}` : 'not available'}</div>
         </div>
         <div className="ref">
-          <div className="k"><i className="mgn" />Schwab margin rate</div>
-          <div className="mrow"><input aria-label="Schwab margin rate percent" inputMode="decimal" placeholder="enter %" value={margin} onChange={e => { setMargin(e.target.value); settings.margin = e.target.value; }} /><span>%</span></div>
-          <div className="s">{marginOk ? 'your entry (stored on this device)' : 'Enter Schwab’s current first-tier rate (schwab.com/margin). No free source to fetch it.'}</div>
+          <div className="k"><i className="mgn" />Margin rate</div>
+          <div className="mrow"><input aria-label="Margin rate percent" inputMode="decimal" placeholder="enter %" value={margin} onChange={e => { setMargin(e.target.value); settings.margin = e.target.value; }} /><span>%</span></div>
+          <div className="s">{marginOk ? 'your entry (stored on this device)' : 'Enter your broker’s current margin rate.'}</div>
         </div>
       </section>
       {cpi && <div className={'card ' + (below.length ? 'warnsoft' : 'goodsoft')}>

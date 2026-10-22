@@ -6,7 +6,7 @@ An installable dividend-income tracker (React + TypeScript + Vite PWA). Live: ht
 - **Calendar**: month-by-month bars of expected payments, a list by month, next-payday countdown and the monthly average.
 - **Safety**: payout ratio vs earnings and vs free cash flow (OCF − capex), consecutive years of dividend growth, and a green/amber/red badge with a plain-English reason. ETFs show “n/a (fund)”.
 - **Snowball**: projected annual income and portfolio value from your monthly contribution, horizon, dividend growth, price growth and DRIP setting (clearly labeled as a projection).
-- **Yield**: each holding’s yield vs the latest CPI-U inflation (BLS) and your Schwab margin rate (you type it in; no free API exists, never defaulted). Holdings below inflation are flagged.
+- **Yield**: each holding’s yield vs the latest CPI-U inflation (BLS) and your margin rate (you type it in; no free API exists, never defaulted). Holdings below inflation are flagged.
 - **Holdings**: manual entry (ticker, shares, total cost basis, DRIP), CSV import, JSON backup/restore and CSV export; stored in localStorage. A clearly labeled sample-portfolio toggle (off by default).
 
 ## Data sources
@@ -20,7 +20,7 @@ An installable dividend-income tracker (React + TypeScript + Vite PWA). Live: ht
 | Live prices (optional) | Finnhub `/quote` (free) | free key in Settings |
 | Last-12-month dividend for unlisted tickers (optional) | Finnhub `/stock/metric` (free). `/stock/dividend` is premium, so not used | free key |
 | Any ticker live (optional) | Cloudflare Worker in `worker/` proxying Yahoo + SEC | your Worker |
-| Schwab margin rate | you enter it (Settings or Yield tab) | – |
+| Margin rate | you enter it (Settings or Yield tab) | – |
 
 Bundled tickers (33): KO PEP JNJ PG O MO VZ T ABBV XOM CVX JPM MAIN HD MCD PFE IBM CSCO TXN LMT UPS NEE ARCC + ETFs SCHD VYM JEPI JEPQ QYLD SPYD DIVO DGRO VIG HDV.
 Other tickers: enter a manual schedule (amount per payment, payments/year, pay months) or use the proxy.

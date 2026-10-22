@@ -3,7 +3,7 @@ const LS = (k: string) => localStorage.getItem('df.' + k) || '';
 export const settings = {
   get finnhub() { return LS('finnhub'); }, set finnhub(v: string) { localStorage.setItem('df.finnhub', v.trim()); },
   get workerUrl() { return LS('worker').replace(/\/+$/, ''); }, set workerUrl(v: string) { localStorage.setItem('df.worker', v.trim()); },
-  /** Schwab margin rate, percent as typed by the user (e.g. "11.5"). Empty = not set. Never defaulted. */
+  /** Margin rate, percent as typed by the user (e.g. "11.5"). Empty = not set. Never defaulted. */
   get margin() { return LS('margin'); }, set margin(v: string) { localStorage.setItem('df.margin', v.trim()); },
   get marginNote() { return LS('marginNote'); }, set marginNote(v: string) { localStorage.setItem('df.marginNote', v.trim()); },
 };
