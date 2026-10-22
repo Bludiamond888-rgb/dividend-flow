@@ -1,0 +1,25 @@
+name: Weekly data refresh
+on:
+  schedule: [{ cron: '23 11 * * 1' }]  # Mondays 11:23 UTC
+  workflow_dispatch:
+permissions: { contents: write, pages: write, id-token: write, actions: write }
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with: { node-version: 20, cache: npm }
+      - run: npm ci
+      # Yahoo chart (prices, dividends), Nasdaq (pay dates), SEC EDGAR (safety), BLS (CPI). Failed tickers keep last week's file.
+      - run: npm run refresh-data
+        env: { SEC_USER_AGENT: 'DividendFlow/1.0 Jackie Lin jackie@localhost' }
+      - run: npm test
+      - name: Commit if changed and redeploy
+        env: { GH_TOKEN: '${{ github.token }}' }
+        run: |
+          if git diff --quiet -- public/data; then echo "No data changes"; exit 0; fi
+          git config user.name 'Jackie Lin'; git config user.email jackie@localhost
+          git add public/data && git commit -m "Weekly data refresh" && git push
+          # pushes made with GITHUB_TOKEN don't trigger other workflows, so dispatch Pages explicitly
+          gh workflow run pages.yml --ref main

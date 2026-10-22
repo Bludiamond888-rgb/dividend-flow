@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#14b8a6"/><stop offset="1" stop-color="#047857"/></linearGradient>
+    <linearGradient id="coin" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#fde68a"/><stop offset="1" stop-color="#f59e0b"/></linearGradient>
+  </defs>
+  <rect width="512" height="512" fill="url(#bg)"/>
+  <g fill="none" stroke-linecap="round">
+    <path d="M70 150 C190 150 200 256 300 256" stroke="#ccfbf1" stroke-width="44" stroke-opacity=".95"/>
+    <path d="M70 256 L300 256" stroke="#99f6e4" stroke-width="44" stroke-opacity=".95"/>
+    <path d="M70 362 C190 362 200 256 300 256" stroke="#5eead4" stroke-width="44" stroke-opacity=".95"/>
+  </g>
+  <circle cx="352" cy="256" r="92" fill="url(#coin)"/>
+  <circle cx="352" cy="256" r="70" fill="none" stroke="#fff7d6" stroke-width="8" stroke-opacity=".8"/>
+  <text x="352" y="290" text-anchor="middle" font-family="-apple-system, Helvetica, Arial, sans-serif" font-weight="800" font-size="104" fill="#92400e">$</text>
+</svg>
