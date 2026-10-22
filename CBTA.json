@@ -1,0 +1,1 @@
+{"ticker":"CBTA","name":"Calamos Bitcoin 80 Series Struc","type":"fund","currency":"USD","exchange":"Cboe","price":24.875,"priceDate":"2026-10-22","cik":null,"divs":[{"ex":"2025-12-12","amt":0.248}],"paySource":null,"sec":null,"fetched":"2026-10-22T19:06:09.131Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

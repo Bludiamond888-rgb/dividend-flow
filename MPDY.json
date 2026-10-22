@@ -1,0 +1,1 @@
+{"ticker":"MPDY","name":"m+ Dualyield Autocall ETF","type":"fund","currency":"USD","exchange":"NYSE Arca","price":23,"priceDate":"2026-10-22","cik":null,"divs":[{"ex":"2026-09-21","amt":0.337}],"paySource":null,"sec":null,"fetched":"2026-10-22T19:07:16.622Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

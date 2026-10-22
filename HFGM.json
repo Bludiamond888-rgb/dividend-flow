@@ -1,0 +1,1 @@
+{"ticker":"HFGM","name":"Unlimited HFGM Global Macro ETF","type":"fund","currency":"USD","exchange":"NYSE","price":30.11,"priceDate":"2026-10-22","cik":null,"divs":[{"ex":"2025-12-24","amt":3.24}],"paySource":null,"sec":null,"fetched":"2026-10-22T19:06:49.972Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

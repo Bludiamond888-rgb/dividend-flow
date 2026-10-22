@@ -1,0 +1,1 @@
+{"ticker":"ARKT","name":"Ark Diet Q4 Buffer ETF","type":"fund","currency":"USD","exchange":"Cboe","price":19.4843,"priceDate":"2026-10-22","cik":null,"divs":[{"ex":"2025-12-26","amt":0.046}],"paySource":null,"sec":null,"fetched":"2026-10-22T19:05:54.719Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

@@ -1,0 +1,1 @@
+{"ticker":"VGNT","name":"Versigent PLC","type":"stock","currency":"USD","exchange":"NYSE","price":42.403,"priceDate":"2026-10-22","cik":2078008,"divs":[{"ex":"2026-09-04","amt":0.13}],"paySource":null,"sec":null,"fetched":"2026-10-22T19:08:08.511Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

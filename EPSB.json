@@ -1,0 +1,1 @@
+{"ticker":"EPSB","name":"Harbor SMID Cap Core ETF","type":"fund","currency":"USD","exchange":"NYSE Arca","price":26.5172,"priceDate":"2026-10-22","cik":null,"divs":[{"ex":"2025-12-19","amt":0.309}],"paySource":null,"sec":null,"fetched":"2026-10-22T19:06:29.477Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}
