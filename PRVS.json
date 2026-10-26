@@ -1,0 +1,1 @@
+{"ticker":"PRVS","name":"Parnassus Value Select ETF","type":"fund","currency":"USD","exchange":"NYSE","price":32.4356,"priceDate":"2026-10-26","cik":null,"divs":[{"ex":"2025-12-19","amt":0.169}],"paySource":null,"sec":null,"fetched":"2026-10-26T17:32:18.035Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

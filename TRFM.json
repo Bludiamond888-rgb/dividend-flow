@@ -1,0 +1,1 @@
+{"ticker":"TRFM","name":"AAM Transformers ETF","type":"fund","currency":"USD","exchange":"NYSE Arca","price":55.1906,"priceDate":"2026-10-26","cik":null,"divs":[{"ex":"2025-12-31","amt":0.081}],"paySource":null,"sec":null,"fetched":"2026-10-26T17:32:38.907Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

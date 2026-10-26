@@ -1,0 +1,1 @@
+{"ticker":"ARWG","name":"Archer Growth ETF","type":"fund","currency":"USD","exchange":"Cboe","price":25.83,"priceDate":"2026-10-26","cik":null,"divs":[{"ex":"2026-03-25","amt":0.034}],"paySource":null,"sec":null,"fetched":"2026-10-26T17:31:01.841Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

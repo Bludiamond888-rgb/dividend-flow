@@ -1,0 +1,1 @@
+{"ticker":"SLVI","name":"NEOS Silver High Income ETF","type":"fund","currency":"USD","exchange":"Cboe","price":44.07,"priceDate":"2026-10-26","cik":null,"divs":[{"ex":"2026-10-21","amt":0.516}],"paySource":null,"sec":null,"fetched":"2026-10-26T17:32:29.091Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

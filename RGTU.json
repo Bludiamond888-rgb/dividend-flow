@@ -1,0 +1,1 @@
+{"ticker":"RGTU","name":"Tradr 2X Long RGTI Daily ETF","type":"fund","currency":"USD","exchange":"Cboe","price":5.41,"priceDate":"2026-10-26","cik":null,"divs":[{"ex":"2025-12-12","amt":9.309}],"paySource":null,"sec":null,"fetched":"2026-10-26T17:32:22.360Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

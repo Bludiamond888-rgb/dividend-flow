@@ -1,0 +1,1 @@
+{"ticker":"MBGL","name":"Mobility Global, Inc.","type":"stock","currency":"USD","exchange":"NYSE","price":18.675,"priceDate":"2026-10-26","cik":2090312,"divs":[{"ex":"2026-08-27","amt":0.06}],"paySource":null,"sec":null,"fetched":"2026-10-26T17:32:01.047Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

@@ -1,0 +1,1 @@
+{"ticker":"WDEF","name":"WisdomTree Trust","type":"fund","currency":"USD","exchange":"NYSE Arca","price":28.46,"priceDate":"2026-10-26","cik":null,"divs":[{"ex":"2025-12-26","amt":0.021}],"paySource":null,"sec":null,"fetched":"2026-10-26T17:32:46.770Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

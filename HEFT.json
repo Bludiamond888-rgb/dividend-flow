@@ -1,0 +1,1 @@
+{"ticker":"HEFT","name":"Hedgeye Fourth Turning ETF","type":"fund","currency":"USD","exchange":"NYSE Arca","price":26.64,"priceDate":"2026-10-26","cik":null,"divs":[{"ex":"2025-12-30","amt":0.005}],"paySource":null,"sec":null,"fetched":"2026-10-26T17:31:43.841Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

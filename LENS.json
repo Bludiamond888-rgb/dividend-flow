@@ -1,0 +1,1 @@
+{"ticker":"LENS","name":"Sarmaya Thematic ETF","type":"fund","currency":"USD","exchange":"Cboe","price":43.45,"priceDate":"2026-10-26","cik":null,"divs":[{"ex":"2025-12-23","amt":0.618}],"paySource":null,"sec":null,"fetched":"2026-10-26T17:31:58.242Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

@@ -1,0 +1,1 @@
+{"ticker":"SLON","name":"ProShares Ultra Solana ETF","type":"fund","currency":"USD","exchange":"NYSE Arca","price":30.13,"priceDate":"2026-10-26","cik":null,"divs":[{"ex":"2025-10-01","amt":4.04}],"paySource":null,"sec":null,"fetched":"2026-10-26T17:32:29.042Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

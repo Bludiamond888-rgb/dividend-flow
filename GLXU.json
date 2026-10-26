@@ -1,0 +1,1 @@
+{"ticker":"GLXU","name":"T-REX 2X Long GLXY Daily Target","type":"fund","currency":"USD","exchange":"Cboe","price":2.08,"priceDate":"2026-10-26","cik":null,"divs":[{"ex":"2025-12-24","amt":0.781}],"paySource":null,"sec":null,"fetched":"2026-10-26T17:31:40.454Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}
