@@ -1,0 +1,1 @@
+{"ticker":"ANG","name":"Corgi FTSE Fallen Angels Bond ETF","type":"fund","currency":"USD","exchange":"Cboe","price":25.23,"priceDate":"2026-11-06","cik":null,"divs":[{"ex":"2026-10-30","amt":0.045}],"paySource":null,"sec":null,"fetched":"2026-11-09T21:32:36.844Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

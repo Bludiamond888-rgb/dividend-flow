@@ -1,0 +1,1 @@
+{"ticker":"HUMN","name":"Roundhill Humanoid Robotics ETF","type":"fund","currency":"USD","exchange":"Cboe","price":27.44,"priceDate":"2026-11-09","cik":null,"divs":[{"ex":"2025-12-30","amt":0.216}],"paySource":null,"sec":null,"fetched":"2026-11-09T21:33:30.653Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

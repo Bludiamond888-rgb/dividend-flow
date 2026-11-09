@@ -1,0 +1,1 @@
+{"ticker":"LCLN","name":"Lincoln International, Inc.","type":"stock","currency":"USD","exchange":"NYSE","price":26.97,"priceDate":"2026-11-09","cik":1925283,"divs":[{"ex":"2026-09-01","amt":0.07}],"paySource":null,"sec":null,"fetched":"2026-11-09T21:33:44.919Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

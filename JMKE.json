@@ -1,0 +1,1 @@
+{"ticker":"JMKE","name":"Jersey Mike's Subs Inc.","type":"stock","currency":"USD","exchange":"NYSE","price":19.43,"priceDate":"2026-11-09","cik":2127043,"divs":[{"ex":"2026-11-05","amt":0.35}],"paySource":null,"sec":null,"fetched":"2026-11-09T21:33:40.516Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

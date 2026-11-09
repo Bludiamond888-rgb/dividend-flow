@@ -1,0 +1,1 @@
+{"ticker":"JBS","name":"JBS N.V.","type":"stock","currency":"USD","exchange":"NYSE","price":13.12,"priceDate":"2026-11-09","cik":1791942,"divs":[{"ex":"2026-05-18","amt":1}],"paySource":null,"sec":null,"fetched":"2026-11-09T21:33:39.361Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

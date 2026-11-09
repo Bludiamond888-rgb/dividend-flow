@@ -1,0 +1,1 @@
+{"ticker":"PRCS","name":"Parnassus Core Select ETF","type":"fund","currency":"USD","exchange":"NYSE","price":29.37,"priceDate":"2026-11-09","cik":null,"divs":[{"ex":"2025-12-19","amt":0.035}],"paySource":null,"sec":null,"fetched":"2026-11-09T21:34:07.693Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

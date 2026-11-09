@@ -1,0 +1,1 @@
+{"ticker":"AUAU","name":"Global X Gold Miners ETF","type":"fund","currency":"USD","exchange":"NYSE Arca","price":39.3207,"priceDate":"2026-11-09","cik":null,"divs":[{"ex":"2026-06-29","amt":0.229}],"paySource":null,"sec":null,"fetched":"2026-11-09T21:32:39.736Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

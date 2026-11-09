@@ -1,0 +1,1 @@
+{"ticker":"PVEX","name":"TrueShares ConVequity ETF","type":"fund","currency":"USD","exchange":"Cboe","price":30.2,"priceDate":"2026-11-09","cik":null,"divs":[{"ex":"2025-12-24","amt":0.054}],"paySource":null,"sec":null,"fetched":"2026-11-09T21:34:09.086Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

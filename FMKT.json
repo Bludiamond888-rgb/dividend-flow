@@ -1,0 +1,1 @@
+{"ticker":"FMKT","name":"The Free Markets ETF","type":"fund","currency":"USD","exchange":"NYSE Arca","price":20.97,"priceDate":"2026-11-09","cik":null,"divs":[{"ex":"2025-12-23","amt":0.464}],"paySource":null,"sec":null,"fetched":"2026-11-09T21:33:18.454Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

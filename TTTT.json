@@ -1,0 +1,1 @@
+{"ticker":"TTTT","name":"Corgi FTSE U.S. TIPS Bond ETF","type":"fund","currency":"USD","exchange":"Cboe","price":25.119,"priceDate":"2026-10-29","cik":null,"divs":[{"ex":"2026-10-30","amt":0.053}],"paySource":null,"sec":null,"fetched":"2026-11-09T21:34:34.032Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}

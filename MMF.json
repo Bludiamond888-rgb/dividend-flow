@@ -1,0 +1,1 @@
+{"ticker":"MMF","name":"Corgi Money Market ETF","type":"fund","currency":"USD","exchange":"Cboe","price":10.03,"priceDate":"2026-11-06","cik":null,"divs":[{"ex":"2026-10-30","amt":0.007}],"paySource":null,"sec":null,"fetched":"2026-11-09T21:33:51.604Z","sources":{"price":"Yahoo Finance chart API","dividends":"Yahoo Finance chart API (ex-dates, amounts)","safety":null}}
